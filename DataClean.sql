@@ -77,6 +77,8 @@ SELECT *
 FROM housingdata_staging1
 WHERE PropertyAddress IS NULL;
 
+-- Some entries are missing PropertyAddress. Entries with identical ParcelIDs seem to have the same PropertyAddress, 
+-- so here I will use a self-join on matching ParcelIDs to populate missing PropertyAddress values.
 UPDATE housingdata_staging1 a
 JOIN housingdata_staging1 b
 	ON a.ParcelID = b.ParcelID
@@ -165,6 +167,7 @@ FROM housingdata_staging1
 GROUP BY SoldAsVacant;
 
 -- 6. Delete Unused Columns
+-- Since I split PropertyAddress and OwnerAddress earlier, we no longer need those columns.
 ALTER TABLE housingdata_staging1
 DROP COLUMN OwnerAddress;
 
