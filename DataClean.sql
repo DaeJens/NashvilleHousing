@@ -164,7 +164,7 @@ SELECT DISTINCT(SoldAsVacant), COUNT(SoldAsVacant)
 FROM housingdata_staging1
 GROUP BY SoldAsVacant;
 
--- Delete Unused Columns
+-- 6. Delete Unused Columns
 ALTER TABLE housingdata_staging1
 DROP COLUMN OwnerAddress;
 
